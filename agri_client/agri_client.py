@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*- 
 
 # DEAMON-クライアント
+import threading
 import time
 import requests
 import sys
@@ -131,24 +132,32 @@ def proc_complete():
 		print "End ,proc_complete"
 		clsLog.debug("End ,proc_complete")
 
+def timer_proc():
+	print "#timer_proc"
+	try:
+		init_proc()
+		mc_proc()
+		proc_sensor()
+		proc_valve()
+		proc_complete()
+	except:
+		print "--------------------------------------------"
+		print traceback.format_exc(sys.exc_info()[2])
+		print "--------------------------------------------"
+		clsLog.test( traceback.format_exc(sys.exc_info()[2]) )
+	
 if __name__ == "__main__":
 	clsLog = com_logging2.loggingClass()
 	time.sleep(30)
 	iCt=0
+	timer_proc()
 	
 	while True:
 		if(iCt >= nTimeMax):
 			iCt=0
-			try:
-				init_proc()
-				mc_proc()
-				proc_sensor()
-				proc_valve()
-				proc_complete()
-			except:
-				print "--------------------------------------------"
-				print traceback.format_exc(sys.exc_info()[2])
-				print "--------------------------------------------"
-				clsLog.test( traceback.format_exc(sys.exc_info()[2]) )
+			tmObj = threading.Timer( 1.0, timer_proc)
+			tmObj.start()
 		time.sleep(1)
 		iCt +=1
+
+
