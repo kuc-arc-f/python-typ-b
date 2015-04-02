@@ -32,11 +32,11 @@ def init_proc():
 		print r.json()
 	except:
 		print "failue, init_proc"
-		clsLog.debug("failue, init_proc")
+		#clsLog.debug("failue, init_proc")
 		raise
 	finally:
 		print "End ,init_proc"
-		clsLog.debug("End ,init_proc")
+		#clsLog.debug("End ,init_proc")
 		
 def mc_proc():
 	cls = com_appConst.appConstClass()
@@ -56,11 +56,11 @@ def mc_proc():
 		print r.text
 	except:
 		print "failue, mc_proc"
-		clsLog.debug("failue, mc_proc")
+		#clsLog.debug("failue, mc_proc")
 		raise
 	finally:
 		print "End ,mc_proc"
-		clsLog.debug("End ,mc_proc")
+		#clsLog.debug("End ,mc_proc")
 		
 def proc_sensor():
 	clsLog = com_logging2.loggingClass()
@@ -80,11 +80,11 @@ def proc_sensor():
 		print r.text
 	except:
 		print "failue, proc_sensor"
-		clsLog.debug("failue, proc_sensor")
+		#clsLog.debug("failue, proc_sensor")
 		raise
 	finally:
 		print "End ,proc_sensor"
-		clsLog.debug("End ,proc_sensor")
+		#clsLog.debug("End ,proc_sensor")
 
 def proc_valve():
 	clsValve= com_valve.valveClass()
@@ -105,11 +105,11 @@ def proc_valve():
 		print r.text
 	except:
 		print "failue, proc_valve"
-		clsLog.debug("failue, proc_valve")
+		#clsLog.debug("failue, proc_valve")
 		raise
 	finally:
 		print "End ,proc_valve"
-		clsLog.debug("End ,proc_valve")
+		#clsLog.debug("End ,proc_valve")
 
 def proc_complete():
 	cls = com_appConst.appConstClass()
@@ -126,13 +126,14 @@ def proc_complete():
 		print r.json()
 	except:
 		print "failue, proc_complete"
-		clsLog.debug("failue, proc_complete")
+		#clsLog.debug("failue, proc_complete")
 		raise
 	finally:
 		print "End ,proc_complete"
-		clsLog.debug("End ,proc_complete")
+		#clsLog.debug("End ,proc_complete")
 
 def timer_proc():
+	clsLog = com_logging2.loggingClass()
 	print "#timer_proc"
 	try:
 		init_proc()
@@ -144,13 +145,13 @@ def timer_proc():
 		print "--------------------------------------------"
 		print traceback.format_exc(sys.exc_info()[2])
 		print "--------------------------------------------"
-		clsLog.test( traceback.format_exc(sys.exc_info()[2]) )
+		clsLog.debug( traceback.format_exc(sys.exc_info()[2]) )
 	
 if __name__ == "__main__":
 	clsLog = com_logging2.loggingClass()
 	time.sleep(30)
 	iCt=0
-	timer_proc()
+	clsLog.debug("Start , main()")
 	
 	while True:
 		if(iCt >= nTimeMax):
